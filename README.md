@@ -18,11 +18,32 @@ acesse a API URL da Lambda passando como query argument `url` a URL do vídeo
 do YouTube compatível com alguns dos [formatos suportados](#formatos-de-link-suportados)
 para obter a URL para a thumbnail do vídeo em alta resolução.
 
+> [!warning]
+> Importante frisar que a URL precisa estar codificada em URL Encoding ([Percent-encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding))
+> para funcionar na AWS. Alguns clientes HTTP [já fazem esta codificação](https://reqbin.com/),
+> mas em outros, como Postman, é necessário [codigifcar manualmente](https://stackoverflow.com/a/58352537).
+>
+> Caso tal problema ocorra, será retornado um resposta automática `400 Bad Request`
+> com o corpo `{"message":null}` da AWS.
+
 Exemplo de requisição usando curl (Linux):
 
 ```sh
 AWS_LAMBDA_URL='https://abcdefghijklmnopqrstuvwxyzabcdef.lambda-url.region.on.aws'
 curl "$AWS_LAMBDA_URL/?url=https%3A%2F%2Fyoutu.be%2FdQw4w9WgXcQ"
+```
+
+Exemplo de requisição usando JavaScript (NodeJS):
+
+```js
+const awsLambdaUrl = "https://abcdefghijklmnopqrstuvwxyzabcdef.lambda-url.region.on.aws";
+const videoUrl = "https://youtu.be/dQw4w9WgXcQ";
+
+const url = new URL(awsLambdaUrl);
+url.searchParams.set("url", videoUrl);
+
+fetch(awsLambdaUrl)
+  .then(async (res) => console.log(await res.json()));
 ```
 
 Resposta esperada:
