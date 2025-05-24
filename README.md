@@ -1,2 +1,77 @@
 # aws-lambda-yt-thumb
-AWS Lambda function que possibilita obter a thumbnail de qualquer vídeo do YouTube com qualidade
+
+Este projeto permite que você crie uma AWS Lambda function que com a capacidade
+de lhe disponibilizar a URL da imagem da thumbnail de qualquer vídeo do YouTube
+em alta qualidade, dado o link para o mesmo.
+
+## Formatos de Link Suportados
+
+- Vídeo: `https://www.youtube.com/watch?v=xxxxxxxxx`
+- Share: `https://youtu.be/xxxxxxxxx`
+- Shorts: `https://www.youtube.com/shorts/xxxxxxxxx`
+
+## Utilizando o Projeto
+
+Com uma Lambda function configurada rodando NodeJS com os arquivos `index.mjs` e
+`LambdaError.mjs`, acesse a API URL da Lambda passando como query argument `url`
+a URL do vídeo do YouTube compatível com alguns dos
+[formatos suportados](#formatos-de-link-suportados) para obter a URL para a
+thumbnail do vídeo em alta resolução.
+
+Exemplo de requisição usando curl (Linux):
+
+```sh
+AWS_LAMBDA_URL='https://abcdefghijklmnopqrstuvwxyzabcdef.lambda-url.region.on.aws'
+curl "$AWS_LAMBDA_URL/?url=https%3A%2F%2Fyoutu.be%2FdQw4w9WgXcQ"
+```
+
+Resposta esperada:
+
+```jsonc
+{
+  "id" : "dQw4w9WgXcQ", // ID do vídeo
+  "type" : "share", // Tipo de link ("video", "shorts", "share")
+  "url" : "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" // URL da thumbnail
+}
+```
+
+### Erros
+
+Durante a execução pode ocorrer os seugintes tipos de erro:
+
+#### 400 - Required URL parameter is missing
+
+```json
+{
+  "error": "Required URL parameter is missing",
+  "data": {
+    "param": "url"
+  }
+}
+```
+
+#### 400 - Malformed URL
+
+```json
+{
+  "error": "Malformed URL",
+  "data": {
+    "url": "<URL em formato inválido>"
+  }
+}
+```
+
+#### 400 - Unsupported YouTube URL
+
+```json
+{
+  "error": "Unsupported YouTube URL",
+  "data": {
+    "url": "https://tutube.com/dQw4w9WgXcQ"
+  }
+}
+```
+
+---
+
+Projeto desenvolvido para aula de Arquitetura Cloud sobre AWS Lambda.
