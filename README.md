@@ -12,11 +12,11 @@ em alta qualidade, dado o link para o mesmo.
 
 ## Utilizando o Projeto
 
-Com uma Lambda function configurada rodando NodeJS com os arquivos `index.mjs` e
-`LambdaError.mjs`, acesse a API URL da Lambda passando como query argument `url`
-a URL do vídeo do YouTube compatível com alguns dos
-[formatos suportados](#formatos-de-link-suportados) para obter a URL para a
-thumbnail do vídeo em alta resolução.
+Com uma Lambda function configurada rodando NodeJS, envie o `zip`
+`getYouTubeThumbnail.zip` -- ou os arquivos `index.mjs` e `LambdaError.mjs` --,
+acesse a API URL da Lambda passando como query argument `url` a URL do vídeo
+do YouTube compatível com alguns dos [formatos suportados](#formatos-de-link-suportados)
+para obter a URL para a thumbnail do vídeo em alta resolução.
 
 Exemplo de requisição usando curl (Linux):
 
