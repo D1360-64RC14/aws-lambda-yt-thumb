@@ -42,7 +42,7 @@ const videoUrl = "https://youtu.be/dQw4w9WgXcQ";
 const url = new URL(awsLambdaUrl);
 url.searchParams.set("url", videoUrl);
 
-fetch(awsLambdaUrl)
+fetch(url)
   .then(async (res) => console.log(await res.json()));
 ```
 
