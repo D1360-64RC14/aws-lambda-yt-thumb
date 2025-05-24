@@ -23,7 +23,7 @@ para obter a URL para a thumbnail do vídeo em alta resolução.
 > para funcionar na AWS. Alguns clientes HTTP [já fazem esta codificação](https://reqbin.com/),
 > mas em outros, como Postman, é necessário [codificar manualmente](https://stackoverflow.com/a/58352537).
 >
-> Caso tal problema ocorra, será retornado um resposta automática `400 Bad Request`
+> Caso tal problema ocorra, será retornado uma resposta automática `400 Bad Request`
 > com o corpo `{"message":null}` da AWS.
 
 Exemplo de requisição usando curl (Linux):
