@@ -37,7 +37,7 @@ Resposta esperada:
 
 ### Erros
 
-Durante a execução pode ocorrer os seugintes tipos de erro:
+Durante a execução pode ocorrer os seguintes tipos de erro:
 
 #### 400 - Required URL parameter is missing
 
